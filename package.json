@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "scripts": {
+    "eslint": "eslint .",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "nuxt preview"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "0.5.0",
+    "@nuxt/ui": "2.18.4",
+    "@vueuse/core": "10.11.1",
+    "@vueuse/nuxt": "10.11.1",
+    "nuxt": "3.12.4"
+  }
+}
