@@ -42,10 +42,22 @@ useHead({
 
 const teams: Ref<Team[]> = ref([{name: 'Team 1'}, {name: 'Team 2'}, {name: 'Team 3'}])
 
-const games: Game[] = [
+// TODO can be achieved in better way?
+watch(teams, () => {
+  console.log("change detected")
+  console.log( games)
+  games.value[0]!.awayTeam = teams.value[0]!.name
+  games.value[0]!.homeTeam = teams.value[1]!.name
+  games.value[1]!.awayTeam = teams.value[1]!.name
+  games.value[1]!.homeTeam = teams.value[2]!.name
+  games.value[2]!.awayTeam = teams.value[2]!.name
+  games.value[2]!.homeTeam = teams.value[0]!.name
+}, { deep: true})
+
+const games: Ref<Game[]> = ref([
   {
     id: 1,
-    awayTeam: teams.value[0]!.name,
+    awayTeam: teams.value[0]!.name, // TODO is this a good way of referencing the team name?
     awayScore: 0,
     awayIP: 0,
     homeTeam: teams.value[1]!.name,
@@ -70,5 +82,5 @@ const games: Game[] = [
     homeScore: 0,
     homeIP: 0,
   }
-]
+])
 </script>
