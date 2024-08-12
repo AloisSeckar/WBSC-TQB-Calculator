@@ -5,9 +5,9 @@ export type Team = {
 export type Game = {
   id: number
   awayTeam: string
-  awayScore: number
+  awayRuns: number
   awayIP: number
   homeTeam: string
-  homeScore: number
+  homeRuns: number
   homeIP: number
 }
