@@ -4,10 +4,20 @@ export type Team = {
 
 export type Game = {
   id: number
-  awayTeam: string
+  awayTeam: Team
   awayRuns: number
   awayIP: number
-  homeTeam: string
+  homeTeam: Team
   homeRuns: number
   homeIP: number
+}
+
+export type TQB = {
+  team: string
+  runsFor: number
+  runsAgainst: number
+  ipOffense: number
+  ipDefense: number
+  tqb: string
+  order: number
 }

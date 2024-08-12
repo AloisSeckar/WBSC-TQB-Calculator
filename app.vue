@@ -19,22 +19,22 @@
     </h2>
     <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-2 items-center">
       <div class="font-bold text-amber-500 pr-1">
-        {{ game.awayTeam }}
+        {{ game.awayTeam.name }}
       </div>
       Runs: <UInput v-model="game.awayRuns" type="number" :min="0" class="w-16" />
-      IP: <UInput v-model="game.awayIP" type="number" :min="0" class="w-16" />
+      IP: <UInput v-model="game.awayIP" type="number" :min="1" class="w-16" />
       <div class="w-2" />
       <div class="font-bold text-amber-500 pr-1">
-        {{ game.homeTeam }}
+        {{ game.homeTeam.name }}
       </div>
       Runs: <UInput v-model="game.homeRuns" type="number" :min="0" class="w-16" />
-      IP: <UInput v-model="game.homeIP" type="number" :min="0" class="w-16" />
+      IP: <UInput v-model="game.homeIP" type="number" :min="1" class="w-16" />
     </div>
     <h2 class="mb-2 text-lg text-sky-500 font-bold">
       TQB:
     </h2>
-    <div v-for="team in teams" :key="team.name" class="mb-2 flex flex-row gap-2 items-center">
-      {{ team.name }}
+    <div v-for="tqb in tqbs" :key="tqb.team" class="mb-2 flex flex-row gap-2 items-center">
+      <div class="font-bold text-amber-500">{{ tqb.team }}</div> = {{ tqb.tqb }} ({{ tqb.order }})
     </div>
   </div>
 </template>
@@ -48,44 +48,84 @@ useHead({
 })
 
 const teams: Ref<Team[]> = ref([{name: 'Team 1'}, {name: 'Team 2'}, {name: 'Team 3'}])
-
-// TODO can be achieved in better way?
-watch(teams, () => {
-  games.value[0]!.awayTeam = teams.value[0]!.name
-  games.value[0]!.homeTeam = teams.value[1]!.name
-  games.value[1]!.awayTeam = teams.value[1]!.name
-  games.value[1]!.homeTeam = teams.value[2]!.name
-  games.value[2]!.awayTeam = teams.value[2]!.name
-  games.value[2]!.homeTeam = teams.value[0]!.name
-}, { deep: true})
+watch(teams, async () => {
+  tqbs.value.length = 0
+}, { deep: true })
 
 const games: Ref<Game[]> = ref([
   {
     id: 1,
-    awayTeam: teams.value[0]!.name, // TODO is this a good way of referencing the team name?
+    awayTeam: teams.value[0],
     awayScore: 0,
-    awayIP: 0,
-    homeTeam: teams.value[1]!.name,
+    awayIP: 7,
+    homeTeam: teams.value[1],
     homeScore: 0,
-    homeIP: 0,
+    homeIP: 7,
   }, 
   {
     id: 2,
-    awayTeam: teams.value[1]!.name,
+    awayTeam: teams.value[1],
     awayScore: 0,
-    awayIP: 0,
-    homeTeam: teams.value[2]!.name,
+    awayIP: 7,
+    homeTeam: teams.value[2],
     homeScore: 0,
-    homeIP: 0,
+    homeIP: 7,
   }, 
   {
     id: 3,
-    awayTeam: teams.value[2]!.name,
+    awayTeam: teams.value[2],
     awayScore: 0,
-    awayIP: 0,
-    homeTeam: teams.value[0]!.name,
+    awayIP: 7,
+    homeTeam: teams.value[0],
     homeScore: 0,
-    homeIP: 0,
+    homeIP: 7,
   }
 ])
+
+const tqbs: Ref<TQB[]> = ref([])
+watch(games, () => {
+  tqbs.value.length = 0
+
+  games.value.forEach((g) => {
+    if (!tqbs.value.some(t => t.team === g.awayTeam.name)) {
+      tqbs.value.push({
+        team: g.awayTeam.name,
+        tqb: 'N/A',
+        runsFor: 0,
+        runsAgainst: 0,
+        ipOffense: 0,
+        ipDefense: 0,
+        order: 0,
+      })
+    }
+    const away = tqbs.value.find(t => t.team === g.awayTeam.name)!
+    away.runsFor += g.awayRuns
+    away.ipOffense += g.awayIP
+    away.runsAgainst += g.homeRuns
+    away.ipDefense += g.homeIP
+
+    if (!tqbs.value.some(t => t.team === g.homeTeam.name)) {
+      tqbs.value.push({
+        team: g.homeTeam.name,
+        tqb: 'N/A',
+        runsFor: 0,
+        runsAgainst: 0,
+        ipOffense: 0,
+        ipDefense: 0,
+        order: 0,
+      })
+    }
+    const home = tqbs.value.find(t => t.team === g.homeTeam.name)!
+    home.runsFor += g.homeRuns
+    home.ipOffense += g.homeIP
+    home.runsAgainst += g.awayRuns
+    home.ipDefense += g.awayIP
+  })
+
+  tqbs.value.forEach((tqb) => {
+    const tqbNum = (tqb.runsFor / tqb.ipOffense) - (tqb.runsAgainst / tqb.ipDefense)
+    tqb.tqb = tqbNum.toFixed(4)
+  })
+
+}, { deep: true})
 </script>
