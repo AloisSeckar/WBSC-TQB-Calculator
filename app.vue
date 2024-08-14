@@ -53,45 +53,13 @@ useHead({
   },
 })
 
-const teams: Ref<Team[]> = ref([
-  { id: 1, name: 'Team 1' },
-  { id: 2, name: 'Team 2' },
-  { id: 3, name: 'Team 3' },
-])
+const teams: Ref<Team[]> = ref(DEFAULT_TEAMS)
 
 watch(teams, async () => {
   tqbs.value.length = 0
 }, { deep: true })
 
-const games: Ref<Game[]> = ref([
-  {
-    id: 1,
-    awayTeam: teams.value[0]!,
-    awayRuns: 0,
-    awayIP: 7,
-    homeTeam: teams.value[1]!,
-    homeRuns: 0,
-    homeIP: 7,
-  },
-  {
-    id: 2,
-    awayTeam: teams.value[1]!,
-    awayRuns: 0,
-    awayIP: 7,
-    homeTeam: teams.value[2]!,
-    homeRuns: 0,
-    homeIP: 7,
-  },
-  {
-    id: 3,
-    awayTeam: teams.value[2]!,
-    awayRuns: 0,
-    awayIP: 7,
-    homeTeam: teams.value[0]!,
-    homeRuns: 0,
-    homeIP: 7,
-  },
-])
+const games: Ref<Game[]> = ref(DEFAULT_GAMES)
 
 const tqbs: Ref<TQB[]> = ref([])
 
