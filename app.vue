@@ -11,8 +11,12 @@
     </h2>
     <div class="mb-4 flex flex-row gap-2 items-center">
       <UInput v-for="team in teams" :key="team.id" v-model="team.name" class="w-40" />
-      <UButton color="emerald" class="w-8 gap-x-0">+</UButton>
-      <UButton color="red" class="w-8 gap-x-0">-</UButton>
+      <UButton color="emerald" class="w-8 gap-x-0">
+        +
+      </UButton>
+      <UButton color="red" class="w-8 gap-x-0">
+        -
+      </UButton>
     </div>
     <h2 class="mb-2 text-lg text-sky-500 font-bold">
       Insert scores:
@@ -34,7 +38,9 @@
       TQB:
     </h2>
     <div v-for="tqb in tqbs" :key="tqb.team" class="mb-2 flex flex-row gap-2 items-center">
-      <div class="font-bold text-amber-500">{{ tqb.team }}</div> = {{ tqb.tqb }} ({{ tqb.order }})
+      <div class="font-bold text-amber-500">
+        {{ tqb.team }}
+      </div> = {{ tqb.tqb }} ({{ tqb.order }})
     </div>
   </div>
 </template>
@@ -48,10 +54,11 @@ useHead({
 })
 
 const teams: Ref<Team[]> = ref([
-  { id: 1, name: 'Team 1' }, 
-  { id: 2, name: 'Team 2' }, 
-  { id: 3, name: 'Team 3' }
+  { id: 1, name: 'Team 1' },
+  { id: 2, name: 'Team 2' },
+  { id: 3, name: 'Team 3' },
 ])
+
 watch(teams, async () => {
   tqbs.value.length = 0
 }, { deep: true })
@@ -59,34 +66,35 @@ watch(teams, async () => {
 const games: Ref<Game[]> = ref([
   {
     id: 1,
-    awayTeam: teams.value[0],
-    awayScore: 0,
+    awayTeam: teams.value[0]!,
+    awayRuns: 0,
     awayIP: 7,
-    homeTeam: teams.value[1],
-    homeScore: 0,
+    homeTeam: teams.value[1]!,
+    homeRuns: 0,
     homeIP: 7,
-  }, 
+  },
   {
     id: 2,
-    awayTeam: teams.value[1],
-    awayScore: 0,
+    awayTeam: teams.value[1]!,
+    awayRuns: 0,
     awayIP: 7,
-    homeTeam: teams.value[2],
-    homeScore: 0,
+    homeTeam: teams.value[2]!,
+    homeRuns: 0,
     homeIP: 7,
-  }, 
+  },
   {
     id: 3,
-    awayTeam: teams.value[2],
-    awayScore: 0,
+    awayTeam: teams.value[2]!,
+    awayRuns: 0,
     awayIP: 7,
-    homeTeam: teams.value[0],
-    homeScore: 0,
+    homeTeam: teams.value[0]!,
+    homeRuns: 0,
     homeIP: 7,
-  }
+  },
 ])
 
 const tqbs: Ref<TQB[]> = ref([])
+
 watch(games, () => {
   tqbs.value.length = 0
 
@@ -130,6 +138,5 @@ watch(games, () => {
     const tqbNum = ((tqb.runsFor || 0) / (tqb.ipOffense || 1)) - ((tqb.runsAgainst || 0) / (tqb.ipDefense || 1))
     tqb.tqb = tqbNum.toFixed(4)
   })
-
-}, { deep: true})
+}, { deep: true })
 </script>
