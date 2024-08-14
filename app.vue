@@ -10,7 +10,7 @@
       Insert teams:
     </h2>
     <div class="mb-4 flex flex-row gap-2 items-center">
-      <UInput v-for="team in teams" :key="team.name" v-model="team.name" class="w-40" />
+      <UInput v-for="team in teams" :key="team.id" v-model="team.name" class="w-40" />
       <UButton color="emerald" class="w-8 gap-x-0">+</UButton>
       <UButton color="red" class="w-8 gap-x-0">-</UButton>
     </div>
@@ -47,7 +47,11 @@ useHead({
   },
 })
 
-const teams: Ref<Team[]> = ref([{name: 'Team 1'}, {name: 'Team 2'}, {name: 'Team 3'}])
+const teams: Ref<Team[]> = ref([
+  { id: 1, name: 'Team 1' }, 
+  { id: 2, name: 'Team 2' }, 
+  { id: 3, name: 'Team 3' }
+])
 watch(teams, async () => {
   tqbs.value.length = 0
 }, { deep: true })
