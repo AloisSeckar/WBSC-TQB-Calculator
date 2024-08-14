@@ -103,10 +103,10 @@ watch(games, () => {
       })
     }
     const away = tqbs.value.find(t => t.team === g.awayTeam.name)!
-    away.runsFor += g.awayRuns
-    away.ipOffense += g.awayIP
-    away.runsAgainst += g.homeRuns
-    away.ipDefense += g.homeIP
+    away.runsFor += g.awayRuns || 0
+    away.ipOffense += g.awayIP || 0
+    away.runsAgainst += g.homeRuns || 0
+    away.ipDefense += g.homeIP || 0
 
     if (!tqbs.value.some(t => t.team === g.homeTeam.name)) {
       tqbs.value.push({
@@ -120,14 +120,14 @@ watch(games, () => {
       })
     }
     const home = tqbs.value.find(t => t.team === g.homeTeam.name)!
-    home.runsFor += g.homeRuns
-    home.ipOffense += g.homeIP
-    home.runsAgainst += g.awayRuns
-    home.ipDefense += g.awayIP
+    home.runsFor += g.homeRuns || 0
+    home.ipOffense += g.homeIP || 0
+    home.runsAgainst += g.awayRuns || 0
+    home.ipDefense += g.awayIP || 0
   })
 
   tqbs.value.forEach((tqb) => {
-    const tqbNum = (tqb.runsFor / tqb.ipOffense) - (tqb.runsAgainst / tqb.ipDefense)
+    const tqbNum = ((tqb.runsFor || 0) / (tqb.ipOffense || 1)) - ((tqb.runsAgainst || 0) / (tqb.ipDefense || 1))
     tqb.tqb = tqbNum.toFixed(4)
   })
 
