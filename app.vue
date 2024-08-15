@@ -9,7 +9,7 @@
     <h2 class="mb-2 text-lg text-sky-500 font-bold">
       Insert teams:
     </h2>
-    <div class="mb-4 flex flex-row gap-2 items-center">
+    <div class="mb-2 flex flex-row gap-2 items-center">
       <UInput v-for="team in teams" :key="team.id" v-model="team.name" class="w-40" />
       <UButton color="emerald" class="w-8 gap-x-0">
         +
@@ -18,26 +18,33 @@
         -
       </UButton>
     </div>
-    <h2 class="mb-2 text-lg text-sky-500 font-bold">
+    <h2 class="my-2 text-lg text-sky-500 font-bold">
       Insert scores:
     </h2>
-    <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-2 items-center">
-      <div class="font-bold text-amber-500 pr-1">
-        {{ game.awayTeam.name }}
+    <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-8 items-center">
+      <div>
+        <div class="font-bold text-amber-500 pr-1 mb-1">
+          {{ game.awayTeam.name }}
+        </div><section />
+        <div class="flex flex-row gap-2 items-center">
+          Runs: <UInput v-model="game.awayRuns" type="number" :min="0" class="w-16" />
+          IP: <UInput v-model="game.awayIP" type="number" :min="1" class="w-16" />
+        </div>
       </div>
-      Runs: <UInput v-model="game.awayRuns" type="number" :min="0" class="w-16" />
-      IP: <UInput v-model="game.awayIP" type="number" :min="1" class="w-16" />
-      <div class="w-2" />
-      <div class="font-bold text-amber-500 pr-1">
-        {{ game.homeTeam.name }}
+      <div>
+        <div class="font-bold text-amber-500 pr-1 mb-1">
+          {{ game.homeTeam.name }}
+        </div>
+        <div class="flex flex-row gap-2 items-center">
+          Runs: <UInput v-model="game.homeRuns" type="number" :min="0" class="w-16" />
+          IP: <UInput v-model="game.homeIP" type="number" :min="1" class="w-16" />
+        </div>
       </div>
-      Runs: <UInput v-model="game.homeRuns" type="number" :min="0" class="w-16" />
-      IP: <UInput v-model="game.homeIP" type="number" :min="1" class="w-16" />
     </div>
-    <h2 class="mb-2 text-lg text-sky-500 font-bold">
+    <h2 class="my-2 text-lg text-sky-500 font-bold">
       TQB:
     </h2>
-    <div v-for="tqb in tqbs" :key="tqb.team" class="mb-2 flex flex-row gap-2 items-center">
+    <div v-for="tqb in tqbs" :key="tqb.team" class="mb-2 flex gap-2 items-center">
       <div class="font-bold text-amber-500">
         {{ tqb.team }}
       </div> = {{ tqb.tqb }} ({{ tqb.order }})
