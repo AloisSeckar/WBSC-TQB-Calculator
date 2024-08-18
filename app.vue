@@ -6,17 +6,20 @@
     <div class="mb-4">
       Online tool for qucikly calculating TQB method at WBSC tournaments
     </div>
+    <div class="mb-2 flex flex-row gap-2 text-center">
+      <UButton color="emerald" size="lg" @click="addTeam">
+        + Team
+      </UButton>
+      <UButton color="red" size="lg" @click="removeTeam">
+        - Team
+      </UButton>
+      <UButton color="yellow" size="lg" @click="resetApp">
+        Reset
+      </UButton>
+    </div>
     <h2 class="mb-2 text-xl text-sky-500 font-bold">
       Teams
     </h2>
-    <div class="mb-2 flex flex-row gap-2">
-      <UButton color="emerald" class="w-10">
-        +
-      </UButton>
-      <UButton color="red" class="w-10">
-        -
-      </UButton>
-    </div>
     <div v-for="team in teams" :key="team.id" class="mb-2 flex flex-row gap-2 items-center">
       <UInput v-model="team.name" class="w-40" />
       <div class="text-lg">
@@ -93,5 +96,17 @@ watch(games, () => {
 
 function getTeam(teamId: number) {
   return teams.value.find(t => t.id === teamId)!
+}
+
+function addTeam() {
+  alert('Soon!')
+}
+
+function removeTeam() {
+  alert('Soon!')
+}
+
+function resetApp() {
+  return navigateTo('/', { external: true })
 }
 </script>
