@@ -29,9 +29,9 @@
     <h2 class="my-2 text-xl text-sky-500 font-bold">
       Scores
     </h2>
-    <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-8 items-center">
+    <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-8 items-start">
       <div>
-        <div class="font-bold text-amber-500 pr-1 mb-1">
+        <div class="font-bold text-lg text-amber-500 pr-1 mb-1">
           {{ getTeam(game.awayTeam).name }}
         </div><section />
         <div class="flex flex-row gap-2 items-center">
@@ -39,6 +39,10 @@
           IP: <UInput v-model="game.awayIP" type="number" :min="1" class="w-16" />
         </div>
       </div>
+      <UButton
+        color="yellow" size="xs" icon="i-heroicons-arrows-right-left"
+        title="Swap teams" @click="swapTeams(game)"
+      />
       <div>
         <div class="font-bold text-amber-500 pr-1 mb-1">
           {{ getTeam(game.homeTeam).name }}
@@ -108,5 +112,9 @@ function removeTeam() {
 
 function resetApp() {
   return navigateTo('/', { external: true })
+}
+
+function swapTeams(game: Game) {
+  [game.awayTeam, game.homeTeam] = [game.homeTeam, game.awayTeam]
 }
 </script>
