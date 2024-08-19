@@ -1,12 +1,12 @@
 <template>
-  <div class="m-4">
-    <h1 class="mb-4 text-2xl text-sky-500 font-bold">
+  <div class="mx-auto my-4 text-center max-w-[600px]">
+    <h1 class="mb-4 text-4xl text-sky-500 font-bold">
       WBSC TQB Calculator
     </h1>
     <div class="mb-4">
       Online tool for qucikly calculating TQB method at WBSC tournaments
     </div>
-    <div class="mb-2 flex flex-row gap-2 text-center">
+    <div class="mb-2 flex flex-row gap-2 justify-center">
       <UButton color="emerald" size="lg" @click="addTeam">
         + Team
       </UButton>
@@ -17,21 +17,21 @@
         Reset
       </UButton>
     </div>
-    <h2 class="mb-2 text-xl text-sky-500 font-bold">
+    <h2 class="mb-3 text-3xl text-sky-500 font-bold uppercase">
       Teams
     </h2>
-    <div v-for="team in teams" :key="team.id" class="mb-2 flex flex-row gap-2 items-center">
+    <div v-for="team in teams" :key="team.id" class="mb-2 flex flex-row gap-2 items-center justify-center">
       <UInput v-model="team.name" class="w-40" />
       <div class="text-lg">
         TQB: <strong>{{ team.tqb.tqb }}</strong>
       </div>
     </div>
-    <h2 class="my-2 text-xl text-sky-500 font-bold">
+    <h2 class="my-3 text-3xl text-sky-500 font-bold uppercase">
       Scores
     </h2>
-    <div v-for="game in games" :key="game.id" class="mb-2 flex flex-row gap-8 items-start">
+    <div v-for="game in games" :key="game.id" class="mb-2 p-2 flex flex-col sm:flex-row gap-2 sm:gap-8 items-center sm:items-start justify-center border-t-2 last:border-b-2">
       <div>
-        <div class="font-bold text-lg text-amber-500 pr-1 mb-1">
+        <div class="font-bold text-lg text-amber-500 pr-1 mb-1 border border-amber-500">
           {{ getTeam(game.awayTeam).name }}
         </div><section />
         <div class="flex flex-row gap-2 items-center">
@@ -44,7 +44,7 @@
         title="Swap teams" @click="swapTeams(game)"
       />
       <div>
-        <div class="font-bold text-amber-500 pr-1 mb-1">
+        <div class="font-bold text-amber-500 pr-1 mb-1 border border-amber-500">
           {{ getTeam(game.homeTeam).name }}
         </div>
         <div class="flex flex-row gap-2 items-center">
@@ -54,6 +54,9 @@
       </div>
     </div>
   </div>
+  <footer class="mb-2 text-center text-xs">
+    Created and maintained by <a class="text-amber-500" href="http://alois-seckar.cz">Alois Seckar</a> (2024)
+  </footer>
 </template>
 
 <script setup lang="ts">
