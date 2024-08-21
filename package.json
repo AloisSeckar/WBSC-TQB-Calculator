@@ -2,8 +2,9 @@
   "private": true,
   "scripts": {
     "eslint": "eslint .",
+    "test": "vitest run",
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "build": "pnpm eslint && pnpm test && nuxt build",
     "start": "nuxt preview"
   },
   "devDependencies": {
@@ -12,6 +13,7 @@
     "@nuxt/ui": "2.18.4",
     "@vueuse/core": "10.11.1",
     "@vueuse/nuxt": "10.11.1",
-    "nuxt": "3.12.4"
+    "nuxt": "3.12.4",
+    "vitest": "2.0.5"
   }
 }
