@@ -60,6 +60,8 @@
 </template>
 
 <script setup lang="ts">
+import { getDefaultGames, getDefaultTeams } from './utils/defaults'
+
 useHead({
   title: 'WBSC TQB Calculator',
   htmlAttrs: {
@@ -67,9 +69,9 @@ useHead({
   },
 })
 
-const teams: Ref<Team[]> = ref(DEFAULT_TEAMS)
+const teams: Ref<Team[]> = ref(getDefaultTeams())
 
-const games: Ref<Game[]> = ref(DEFAULT_GAMES)
+const games: Ref<Game[]> = ref(getDefaultGames())
 
 watch(games, () => {
   calcTQB(teams.value, games.value)
