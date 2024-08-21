@@ -7,6 +7,7 @@
     "start": "nuxt preview"
   },
   "devDependencies": {
+    "@iconify-json/heroicons": "1.1.24",
     "@nuxt/eslint": "0.3.13",
     "@nuxt/ui": "2.18.4",
     "@vueuse/core": "10.11.1",
