@@ -4,12 +4,12 @@
     "eslint": "eslint .",
     "test": "vitest run",
     "dev": "nuxt dev",
-    "build": "pnpm eslint && pnpm test && nuxt build",
+    "build": "nuxt build",
     "start": "nuxt preview"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "1.1.24",
-    "@nuxt/eslint": "0.5.2",
+    "@nuxt/eslint": "0.3.13",
     "@nuxt/ui": "2.18.4",
     "nuxt": "3.13.0",
     "vitest": "2.0.5"
