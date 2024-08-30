@@ -31,7 +31,7 @@
     </h2>
     <div v-for="game in games" :key="game.id" class="mb-2 p-2 flex flex-col sm:flex-row gap-2 sm:gap-8 items-center sm:items-start justify-center border-t-2 last:border-b-2">
       <div>
-        <div class="font-bold text-lg text-amber-500 pr-1 mb-1 border border-amber-500">
+        <div class="font-bold text-lg text-emerald-500 dark:text-amber-500 pr-1 mb-1 border border-emerald-500 dark:border-amber-500">
           {{ getTeam(game.awayTeam).name }}
         </div><section />
         <div class="flex flex-row gap-2 items-center">
@@ -39,12 +39,14 @@
           IP: <UInput v-model="game.awayIP" type="number" :min="1" class="w-16" />
         </div>
       </div>
-      <UButton
-        color="yellow" size="xs" icon="i-heroicons-arrows-right-left"
-        title="Swap teams" @click="swapTeams(game)"
-      />
+      <ClientOnly>
+        <UButton
+          :color="theme" size="xs" icon="i-heroicons-arrows-right-left"
+          title="Swap teams" @click="swapTeams(game)"
+        />
+      </ClientOnly>
       <div>
-        <div class="font-bold text-amber-500 pr-1 mb-1 border border-amber-500">
+        <div class="font-bold  text-emerald-500 dark:text-amber-500 pr-1 mb-1 border border-emerald-500 dark:border-amber-500">
           {{ getTeam(game.homeTeam).name }}
         </div>
         <div class="flex flex-row gap-2 items-center">
@@ -55,7 +57,7 @@
     </div>
   </div>
   <footer class="mb-2 text-center text-xs">
-    Created and maintained by <a class="text-amber-500" href="http://alois-seckar.cz">Alois Seckar</a> (2024)
+    Created and maintained by <a class="text-sky-500" href="http://alois-seckar.cz">Alois Seckar</a> (2024)
   </footer>
 </template>
 
@@ -68,6 +70,8 @@ useHead({
     lang: 'en',
   },
 })
+
+const theme = computed(() => useColorMode().value === 'dark' ? 'yellow' : 'emerald')
 
 const teams: Ref<Team[]> = ref(getDefaultTeams())
 
