@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "nuxt-ignis": "0.1.4",
-    "vitest": "2.0.5"
+    "vitest": "2.0.5",
+    "vue": "latest",
+    "vue-router": "latest"
   }
 }
