@@ -23,7 +23,10 @@
     <div v-for="team in teams" :key="team.id" class="mb-2 flex flex-row gap-2 items-center justify-center">
       <UInput v-model="team.name" class="w-40" />
       <div class="text-lg">
-        TQB: <strong>{{ team.tqb.tqb }}</strong>
+        TQB:
+        <div class="inline-block text-right w-16 font-bold">
+          {{ team.tqb.tqb }}
+        </div>
       </div>
     </div>
     <h2 class="my-3 text-3xl text-sky-500 font-bold uppercase">
