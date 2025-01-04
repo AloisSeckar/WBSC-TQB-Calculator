@@ -7,11 +7,11 @@
       Online tool for qucikly calculating TQB method at WBSC tournaments
     </div>
     <div class="mb-2 flex flex-row gap-2 justify-center">
-      <UButton color="emerald" size="lg" @click="addTeam">
-        + Team
+      <UButton :color="t3" :class="b3" size="lg" @click="setTeams(3)">
+        3 Teams
       </UButton>
-      <UButton color="red" size="lg" @click="removeTeam">
-        - Team
+      <UButton :color="t4" :class="b4" size="lg" @click="setTeams(4)">
+        4 Teams
       </UButton>
       <UButton color="yellow" size="lg" @click="resetApp">
         Reset
@@ -88,12 +88,20 @@ function getTeam(teamId: number) {
   return teams.value.find(t => t.id === teamId)!
 }
 
-function addTeam() {
-  alert('Soon!')
-}
-
-function removeTeam() {
-  alert('Soon!')
+type BColor = 'emerald' | 'red'
+const t3 = ref<BColor>('emerald')
+const t4 = ref<BColor>('red')
+const b3 = ref('border border-2 border-amber-300')
+const b4 = ref('border-0')
+function setTeams(entries: number) {
+  [t3.value, t4.value] = [t4.value, t3.value];
+  [b3.value, b4.value] = [b4.value, b3.value]
+  //
+  teams.value.length = 0
+  teams.value.push(...getDefaultTeams(entries))
+  //
+  games.value.length = 0
+  games.value.push(...getDefaultGames(entries))
 }
 
 function resetApp() {
