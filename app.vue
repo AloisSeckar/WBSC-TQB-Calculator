@@ -57,7 +57,7 @@
     </div>
   </div>
   <footer class="mb-2 text-center text-xs">
-    Created and maintained by <a class="text-sky-500" href="http://alois-seckar.cz">Alois Seckar</a> (2024)
+    Created and maintained by <a class="text-sky-500" href="http://alois-seckar.cz">Alois Seckar</a> (2024 - {{ new Date().getFullYear() }})
   </footer>
 </template>
 
