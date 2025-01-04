@@ -4,7 +4,7 @@
       WBSC TQB Calculator
     </h1>
     <div class="mb-4">
-      Online tool for qucikly calculating TQB method at WBSC tournaments
+      Online tool for calculating TQB at baseball/softball competitions and tournaments
     </div>
     <div class="mb-2 flex flex-row gap-2 justify-center">
       <UButton :color="t3" :class="b3" size="lg" @click="setTeams(3)">
@@ -34,6 +34,9 @@
     </h2>
     <div v-for="game in games" :key="game.id" class="mb-2 p-2 flex flex-col sm:flex-row gap-2 sm:gap-8 items-center sm:items-start justify-center border-t-2 last:border-b-2">
       <div>
+        <div class="mb-1 font-bold text-sky-500">
+          AWAY
+        </div>
         <div class="font-bold text-lg text-emerald-500 dark:text-amber-500 pr-1 mb-1 border border-emerald-500 dark:border-amber-500">
           {{ getTeam(game.awayTeam).name }}
         </div><section />
@@ -43,12 +46,17 @@
         </div>
       </div>
       <ClientOnly>
-        <UButton
-          :color="theme" size="xs" icon="i-heroicons-arrows-right-left"
-          title="Swap teams" @click="swapTeams(game)"
-        />
+        <div class="pt-2 sm:pt-7">
+          <UButton
+            :color="theme" size="xs" icon="i-heroicons-arrows-right-left"
+            title="Swap teams" @click="swapTeams(game)"
+          />
+        </div>
       </ClientOnly>
       <div>
+        <div class="mb-1 font-bold text-sky-500">
+          HOME
+        </div>
         <div class="font-bold  text-emerald-500 dark:text-amber-500 pr-1 mb-1 border border-emerald-500 dark:border-amber-500">
           {{ getTeam(game.homeTeam).name }}
         </div>
